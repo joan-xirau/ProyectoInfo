@@ -1,0 +1,40 @@
+NODES 
+
+A 2 18  
+B 9 15  
+C 14 22  
+D 17 14  
+E 3 3  
+F 7 6  
+G 11 11  
+H 9 2  
+I 20 2  
+J 12 6  
+K 4 16  
+L 5 11  
+
+SEGMENTS
+
+AB A B  
+AE A E  
+AK A K  
+BC B C  
+BF B F  
+BK B K  
+BG B G  
+CD C D  
+CG C G  
+DH D H  
+DI D I  
+EF E F  
+FL F L  
+GB G B  
+GF G F  
+GH G H  
+ID I D  
+IJ I J  
+JI J I  
+KA K A  
+KL K L  
+LK L K  
+LF L F  
