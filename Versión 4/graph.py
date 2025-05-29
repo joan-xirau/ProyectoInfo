@@ -127,7 +127,7 @@ def Plot(g):
         ax.clear()
         
         # Configuración de estilo para mejor visualización
-        plt.style.use('seaborn')  # Estilo más limpio
+        plt.style.use('classic')  # Estilo más limpio
         ax.grid(True, linestyle='--', alpha=0.6)  # Grid más suave
         
         # Dibujar cada flecha en el grafo con parámetros más pequeños
@@ -205,7 +205,7 @@ def Plot(g):
 
     def draw_node(node):
         ax.clear()
-        plt.style.use('seaborn')
+        plt.style.use('classic')
         ax.grid(True, linestyle='--', alpha=0.6)
 
         # Dibujar todos los nodos

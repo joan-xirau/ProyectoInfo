@@ -754,6 +754,134 @@ def execute_kml():
         messagebox.showerror("ERROR", f"No se pudo ejecutar el archivo: {str(e)}")
 
 
+from PIL import Image, ImageTk  # Añade esto al inicio del archivo con los otros imports
+
+
+def Instrucciones():
+    # Crear ventana emergente principal
+    instrucciones_window = tk.Toplevel()
+    instrucciones_window.title("Instrucciones de Uso")
+    instrucciones_window.geometry("800x600")
+
+    # Frame principal con scrollbar
+    main_frame = tk.Frame(instrucciones_window)
+    main_frame.pack(fill=tk.BOTH, expand=True)
+
+    # Canvas y scrollbar
+    canvas = tk.Canvas(main_frame)
+    scrollbar = tk.Scrollbar(main_frame, orient="vertical", command=canvas.yview)
+    scrollable_frame = tk.Frame(canvas)
+
+    # Configurar el sistema de scroll
+    scrollable_frame.bind(
+        "<Configure>",
+        lambda e: canvas.configure(
+            scrollregion=canvas.bbox("all")
+        )
+    )
+
+    canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+    canvas.configure(yscrollcommand=scrollbar.set)
+
+    # Empaquetar canvas y scrollbar
+    canvas.pack(side="left", fill="both", expand=True)
+    scrollbar.pack(side="right", fill="y")
+
+    # Contenido de las instrucciones
+    text_widget = tk.Text(scrollable_frame, wrap=tk.WORD, font=("Arial", 12))
+    text_widget.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+
+    instrucciones = """
+    INTERFAZ GRÁFICA DE GRAFOS - MANUAL DE USO
+
+    1. CARGA DE GRAFOS
+    -----------------
+    - Ejemplo 1/2: Carga grafos de ejemplo predefinidos
+    - Grafo en Blanco: Crea un grafo vacío para construir manualmente
+    - Subir Archivo: Carga un grafo desde 3 archivos (_nav.txt, _seg.txt, _aer.txt)
+    - Cargar Cataluña/España/Europa: Carga grafos predefinidos de estas regiones
+
+    2. EDICIÓN DEL GRAFO
+    -------------------
+    - Añadir Nodo: Introduce "nombre x y" en el campo de texto y pulsa el botón
+    - Eliminar Nodo: Introduce el nombre del nodo y pulsa el botón
+    - Añadir Segmento: Introduce "nombre origen destino" y pulsa el botón
+    - Eliminar Segmento: Introduce el nombre del segmento y pulsa el botón
+    - Guardar Archivo: Guarda el grafo actual en un archivo de texto
+
+    3. OPERACIONES CON CAMINOS
+    -------------------------
+    - Mejor Camino: Introduce "origen destino" para encontrar el camino más corto
+    - Añadir a Camino: Añade nodos a un camino personalizado
+    - Contiene Nodo: Comprueba si un nodo está en el camino actual
+    - Coste a Nodo: Muestra el coste acumulado hasta un nodo en el camino
+
+    4. VISUALIZACIÓN KML
+    -------------------
+    - Guardar KML: Exporta el grafo a un archivo KML para Google Earth
+    - Ejecutar KML: Abre directamente el archivo KML generado
+
+    5. ALGORITMOS DISPONIBLES
+    ------------------------
+    - Dijkstra: Algoritmo clásico de caminos mínimos
+    - A*: Algoritmo heurístico para caminos mínimos
+    - Original: Algoritmo básico de búsqueda de caminos
+    """
+
+    text_widget.insert(tk.END, instrucciones)
+    text_widget.config(state=tk.DISABLED)
+
+    # Botón para mostrar imagen
+    image_button = tk.Button(
+        scrollable_frame,
+        text="Ver Diagrama",
+        command=lambda: show_instruction_image(),
+        font=("Arial", 12, "bold"),
+        bg="#4CAF50",
+        fg="white"
+    )
+    image_button.pack(pady=10)
+
+    # Botón de cierre
+    close_button = tk.Button(
+        scrollable_frame,
+        text="Cerrar",
+        command=instrucciones_window.destroy,
+        font=("Arial", 12),
+        bg="#f44336",
+        fg="white"
+    )
+    close_button.pack(pady=10)
+
+    def show_instruction_image():
+        # Crear ventana emergente para la imagen
+        image_window = tk.Toplevel()
+        image_window.title("Foto Grupo")
+
+        try:
+            # Cargar la imagen (reemplaza "instruction_image.png" con tu archivo de imagen)
+            image = Image.open("Grupo.png")
+            photo = ImageTk.PhotoImage(image)
+
+            # Mostrar la imagen
+            label = tk.Label(image_window, image=photo)
+            label.image = photo  # Mantener una referencia
+            label.pack()
+
+            # Botón de cierre
+            close_img_button = tk.Button(
+                image_window,
+                text="Cerrar",
+                command=image_window.destroy,
+                font=("Arial", 10),
+                bg="#f44336",
+                fg="white"
+            )
+            close_img_button.pack(pady=5)
+
+        except Exception as e:
+            messagebox.showerror("Error", f"No se pudo cargar la imagen: {str(e)}")
+            image_window.destroy()
 
 #Interfaz Gráfica
 ventana = tk.Tk()

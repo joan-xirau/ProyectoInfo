@@ -47,7 +47,7 @@ class Path:
     def plot(self, graph):
         """Genera la visualización del camino en el grafo con el nuevo estilo"""
         fig, ax = plt.subplots(figsize=(12, 8))
-        plt.style.use('seaborn')
+        plt.style.use('classic')
         ax.grid(True, linestyle='--', alpha=0.6)
 
         # Dibujar todos los nodos
